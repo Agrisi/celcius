@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor de Temperatura</title>
+    <style>
+        body {
+            transition: background-color 0.5s ease;
+        }
+
+        .blue {
+            background-color: #3498db;
+        }
+
+        .red {
+            background-color: #e74c3c;
+        }
+
+        .container {
+            max-width: 300px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Conversor de Temperatura</h2>
+        <div class="input-group">
+            <label for="celsius">Graus Celsius:</label>
+            <input type="number" id="celsius" step="0.01" onchange="convertTemperature()" />
+        </div>
+        <div class="input-group">
+            <label for="fahrenheit">Graus Fahrenheit:</label>
+            <input type="text" id="fahrenheit" disabled />
+        </div>
+        <div class="input-group">
+            <label for="kelvin">Kelvin:</label>
+            <input type="text" id="kelvin" disabled />
+        </div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            var celsiusInput = document.getElementById('celsius');
+            var fahrenheitOutput = document.getElementById('fahrenheit');
+            var kelvinOutput = document.getElementById('kelvin');
+            var temperature = parseFloat(celsiusInput.value);
+
+            var fahrenheit = (temperature * 9/5) + 32;
+            var kelvin = temperature + 273.15;
+
+            fahrenheitOutput.value = fahrenheit.toFixed(2);
+            kelvinOutput.value = kelvin.toFixed(2);
+
+            changeBackgroundColor(temperature);
+        }
+
+        function changeBackgroundColor(temperature) {
+            var body = document.body;
+            var temperatureRange = 25; 
+
+            if (temperature >= temperatureRange) {
+                body.classList.remove('blue');
+                body.classList.add('red');
+            } else {
+                body.classList.remove('red');
+                body.classList.add('blue');
+            }
+        }
+    </script>
+</body>
+</html>
